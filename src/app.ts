@@ -1,29 +1,28 @@
 import { buildApplication, buildCommand, numberParser } from '@stricli/core';
 import { description, version } from '@/../package.json';
+import { DEFAULT_IMAGE_HEIGHT, OUTPUT_BASE_DIR } from '@/constants';
 
 const command = buildCommand({
   loader: async () => import('./impl'),
   parameters: {
     positional: {
-      kind: 'tuple',
-      parameters: [
-        {
-          brief:
-            'Document URL. Example: https://digi.vatlib.it/view/MSS_Vat.gr.1209',
-          parse: String,
-        },
-      ],
+      kind: 'array',
+      parameter: {
+        brief:
+          'List of document names to scrape from Digivatlib (e.g., "Cicognara.VI.319", "Borg.ill.19")',
+        parse: String,
+      },
     },
     flags: {
       outDir: {
         kind: 'parsed',
-        brief: 'Output directory. Default to "./images/<document-id>"',
+        brief: `Output directory. Default to "${OUTPUT_BASE_DIR}/<document-name>"`,
         parse: String,
         optional: true,
       },
       height: {
         kind: 'parsed',
-        brief: 'Image height',
+        brief: `Image height. Default to ${DEFAULT_IMAGE_HEIGHT} pixels`,
         parse: numberParser,
         optional: true,
       },

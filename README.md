@@ -99,7 +99,7 @@ USAGE
 Digital Vatican Library Scraper
 
 FLAGS
-     [--outDir]           Output directory. Default to "./images/<document-id>"
+     [--outDir]           Output directory. Default to "./output/<document-id>"
      [--height]           Image height
      [--width]            Image width
      [--toPdf/--noToPdf]  Convert downloaded images to a single PDF file
