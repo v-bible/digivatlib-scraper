@@ -86,28 +86,40 @@ Install dependencies:
 pnpm install
 ```
 
+Build the project:
+
+```bash
+pnpm build
+```
+
 <!-- Usage -->
 
 ## :eyes: Usage
 
 ```bash
 USAGE
-  digivatlib-scraper [--outDir value] [--height value] [--width value] [--toPdf] <arg1>
+  digivatlib-scraper [--outDir value] [--height value] [--width value] [--toPdf] <args>...
   digivatlib-scraper --help
   digivatlib-scraper --version
 
 Digital Vatican Library Scraper
 
 FLAGS
-     [--outDir]           Output directory. Default to "./output/<document-id>"
-     [--height]           Image height
+     [--outDir]           Output directory. Default to "./output/<document-name>"
+     [--height]           Image height. Default to 720 pixels
      [--width]            Image width
      [--toPdf/--noToPdf]  Convert downloaded images to a single PDF file
   -h  --help              Print help information and exit
   -v  --version           Print version information and exit
 
 ARGUMENTS
-  arg1  Document URL. Example: https://digi.vatlib.it/view/MSS_Vat.gr.1209
+  args...  List of document names to scrape from Digivatlib (e.g., "Cicognara.VI.319", "Borg.ill.19")
+```
+
+**Example**:
+
+```bash
+pnpm build && ./dist/cli.js --outDir ./my-output --height 800 --toPdf Cicognara.VI.319 Borg.ill.19
 ```
 
 <!-- Contributing -->
