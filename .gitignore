@@ -66,3 +66,7 @@ testem.log
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# Temporary folders
+output/
+tmp/
