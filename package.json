@@ -6,7 +6,8 @@
   "scripts": {
     "prepare": "husky",
     "prebuild": "tsc",
-    "build": "tsup"
+    "build": "tsup",
+    "postinstall": "npx @stricli/auto-complete@latest install digivatlib-scraper --bash __digivatlib-scraper_bash_complete"
   },
   "files": [
     "dist"
