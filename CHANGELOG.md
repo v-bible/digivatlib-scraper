@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/v-bible/digivatlib-scraper/compare/v1.0.2...v1.0.3) (2026-04-29)
+
+
+### Bug Fixes
+
+* bump packages ([6c256ca](https://github.com/v-bible/digivatlib-scraper/commit/6c256ca233576e81f2ad539090958a5327d4e3d2))
+
 ## [1.0.2](https://github.com/v-bible/digivatlib-scraper/compare/v1.0.1...v1.0.2) (2026-04-29)
 
 
