@@ -37,7 +37,6 @@ export default async function (
     );
 
     await mkdir(outDir, { recursive: true });
-    console.log('outDir', outDir);
 
     await writeFile(
       `${outDir}/manifest.json`,
