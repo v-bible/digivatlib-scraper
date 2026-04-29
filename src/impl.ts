@@ -17,10 +17,33 @@ export default async function (
   flags: CommandFlags,
   ...documentNames: string[]
 ): Promise<void> {
-  for (const documentName of documentNames) {
-    const outDir = flags.outDir || `${OUTPUT_BASE_DIR}/${documentName}`;
+  const processDocument = async (documentName: string): Promise<void> => {
+    if (
+      documentName.startsWith('http://') ||
+      documentName.startsWith('https://')
+    ) {
+      logger.warn(
+        `Skipping ${documentName} because it appears to be a URL. Please provide only the document name.`,
+      );
+      return;
+    }
 
-    const images = await scrapeData(documentName, flags.height, flags.width);
+    const outDir = `${flags.outDir || OUTPUT_BASE_DIR}/${documentName}`;
+
+    const { images, manifest } = await scrapeData(
+      documentName,
+      flags.height,
+      flags.width,
+    );
+
+    await mkdir(outDir, { recursive: true });
+    console.log('outDir', outDir);
+
+    await writeFile(
+      `${outDir}/manifest.json`,
+      JSON.stringify(manifest, null, 2),
+    );
+    logger.info(`Saved manifest to ${outDir}/manifest.json`);
 
     for (const [index, imageData] of images.entries()) {
       logger.info(
@@ -32,7 +55,6 @@ export default async function (
       const buffer = Buffer.from(arrayBuffer);
 
       const filename = imageData.name;
-      await mkdir(outDir, { recursive: true });
       const filePath = `${outDir}/${filename}`;
       await writeFile(filePath, buffer);
       logger.info(`Saved image to ${filePath}`);
@@ -70,5 +92,25 @@ export default async function (
       await writeFile(pdfPath, pdfBytes);
       logger.info(`PDF saved to ${pdfPath}`);
     }
+  };
+
+  const results = await Promise.allSettled(
+    documentNames.map((documentName) => processDocument(documentName)),
+  );
+
+  const failedDocuments = results
+    .map((result, index) => ({ result, documentName: documentNames[index] }))
+    .filter(({ result }) => result.status === 'rejected');
+
+  if (failedDocuments.length > 0) {
+    for (const { result, documentName } of failedDocuments) {
+      logger.error(
+        `Failed to process ${documentName}: ${(result as PromiseRejectedResult).reason}`,
+      );
+    }
+
+    throw new Error(
+      `Failed to process ${failedDocuments.length}/${documentNames.length} documents`,
+    );
   }
 }
