@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.2](https://github.com/v-bible/digivatlib-scraper/compare/v1.0.1...v1.0.2) (2026-04-29)
+
+
+### Bug Fixes
+
+* crawl documents concurrently ([530a5f9](https://github.com/v-bible/digivatlib-scraper/commit/530a5f9e78c309bb8213cf0608a69aa3919814a7))
+* duplicate image files got overwritten ([11dc764](https://github.com/v-bible/digivatlib-scraper/commit/11dc764a946b264179346230996c4ded1169861b))
+* duplicate image files got overwritten ([530a5f9](https://github.com/v-bible/digivatlib-scraper/commit/530a5f9e78c309bb8213cf0608a69aa3919814a7))
+
 ## [1.0.1](https://github.com/v-bible/digivatlib-scraper/compare/v1.0.0...v1.0.1) (2025-12-26)
 
 
