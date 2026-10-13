@@ -1,49 +1,66 @@
 {
   "name": "@v-bible/digivatlib-scraper",
+  "type": "module",
   "version": "1.0.3",
   "description": "Digital Vatican Library Scraper",
-  "type": "module",
-  "scripts": {
-    "prepare": "husky",
-    "prebuild": "tsc",
-    "build": "tsup",
-    "postinstall": "npx @stricli/auto-complete@latest install digivatlib-scraper --bash __digivatlib-scraper_bash_complete"
+  "license": "CC-BY-NC-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v-bible/digivatlib-scraper.git"
   },
-  "files": [
-    "dist"
-  ],
+  "exports": {
+    ".": {
+      "types": {
+        "import": "./dist/cli.d.mts",
+        "require": "./dist/cli.d.cts"
+      },
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/cli.cjs",
+  "module": "./dist/cli.js",
+  "types": "./dist/cli.d.mts",
   "bin": {
     "digivatlib-scraper": "dist/cli.js",
     "__digivatlib-scraper_bash_complete": "dist/bash-complete.js"
   },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "postinstall": "npx @stricli/auto-complete@latest install digivatlib-scraper --bash __digivatlib-scraper_bash_complete"
+  },
   "dependencies": {
-    "@stricli/auto-complete": "1.2.6",
-    "@stricli/core": "1.2.6",
-    "dotenv": "17.4.2",
-    "es-toolkit": "1.46.0",
+    "@stricli/auto-complete": "1.3.0",
+    "@stricli/core": "1.3.0",
+    "dotenv": "18.0.7",
+    "es-toolkit": "1.52.0",
     "pdf-lib": "1.17.1",
     "winston": "3.19.0"
   },
   "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@commitlint/cli": "20.5.2",
-    "@commitlint/config-conventional": "20.5.0",
-    "@types/node": "25.6.0",
-    "@typescript-eslint/eslint-plugin": "8.59.1",
-    "@typescript-eslint/parser": "8.59.1",
-    "eslint": "10.2.1",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-prettier": "5.5.5",
-    "globals": "17.5.0",
+    "@antfu/eslint-config": "9.5.1",
+    "@arethetypeswrong/cli": "0.18.5",
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
+    "@types/node": "26.6.5",
+    "eslint": "10.12.0",
+    "eslint-plugin-format": "2.0.1",
+    "globals": "17.13.0",
     "husky": "9.1.7",
-    "lint-staged": "16.4.0",
-    "prettier": "3.8.3",
-    "tsup": "8.5.1",
-    "tsx": "4.21.0",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.59.1"
+    "lint-staged": "17.6.0",
+    "prettier": "3.9.10",
+    "tsdown": "0.23.1",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2"
   }
 }

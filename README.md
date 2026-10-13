@@ -12,7 +12,7 @@
 
 <!-- Table of Contents -->
 
-# :notebook_with_decorative_cover: Table of Contents
+## :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
   - [Environment Variables](#key-environment-variables)
@@ -98,19 +98,22 @@ pnpm build
 
 ```bash
 USAGE
-  digivatlib-scraper [--outDir value] [--height value] [--width value] [--toPdf] <args>...
+  digivatlib-scraper [--outDir value] [--height value] [--width value] [--toPdf] [--ignoreCompleted] [--overwrite] [--fromFile value] <args>...
   digivatlib-scraper --help
   digivatlib-scraper --version
 
 Digital Vatican Library Scraper
 
 FLAGS
-     [--outDir]           Output directory. Default to "./output/<document-name>"
-     [--height]           Image height. Default to 720 pixels
-     [--width]            Image width
-     [--toPdf/--noToPdf]  Convert downloaded images to a single PDF file
-  -h  --help              Print help information and exit
-  -v  --version           Print version information and exit
+     [--outDir]                               Output directory. Default to "./output/<document-name>"
+     [--height]                               Image height. Default to 720 pixels
+     [--width]                                Image width
+     [--toPdf/--noToPdf]                      Convert downloaded images to a single PDF file
+     [--ignoreCompleted/--noIgnoreCompleted]  Skip downloading if all images already exist in the output directory, or PDF already exists if --toPdf is set
+     [--overwrite/--noOverwrite]              Overwrite existing files if they already exist in the output directory
+     [--fromFile]                             Path to a text file containing a list of document names to scrape from Digivatlib (one name per line)
+  -h  --help                                  Print help information and exit
+  -v  --version                               Print version information and exit
 
 ARGUMENTS
   args...  List of document names to scrape from Digivatlib (e.g., "Cicognara.VI.319", "Borg.ill.19")
@@ -119,7 +122,9 @@ ARGUMENTS
 **Example**:
 
 ```bash
-pnpm build && ./dist/cli.js --outDir ./my-output --height 800 --toPdf Cicognara.VI.319 Borg.ill.19
+pnpm build && ./dist/cli.mjs --outDir ./my-output --height 800 --toPdf Cicognara.VI.319 Borg.ill.19
+
+pnpm build && ./dist/cli.mjs --outDir ./my-output --toPdf --ignoreCompleted --overwrite --fromFile ./document-names.txt
 ```
 
 <!-- Contributing -->
@@ -127,7 +132,7 @@ pnpm build && ./dist/cli.js --outDir ./my-output --height 800 --toPdf Cicognara.
 ## :wave: Contributing
 
 <a href="https://github.com/v-bible/digivatlib-scraper/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=v-bible/digivatlib-scraper" />
+  <img src="https://contrib.rocks/image?repo=v-bible/digivatlib-scraper" alt="contributors" />
 </a>
 
 Contributions are always welcome!

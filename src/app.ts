@@ -1,6 +1,6 @@
-import { buildApplication, buildCommand, numberParser } from '@stricli/core';
-import { description, version } from '@/../package.json';
-import { DEFAULT_IMAGE_HEIGHT, OUTPUT_BASE_DIR } from '@/constants';
+import { buildApplication, buildCommand, numberParser } from '@stricli/core'
+import { description, version } from '@/../package.json'
+import { DEFAULT_IMAGE_HEIGHT, OUTPUT_BASE_DIR } from '@/constants'
 
 const command = buildCommand({
   loader: async () => import('./impl'),
@@ -37,16 +37,35 @@ const command = buildCommand({
         brief: 'Convert downloaded images to a single PDF file',
         optional: true,
       },
+      ignoreCompleted: {
+        kind: 'boolean',
+        brief:
+          'Skip downloading if all images already exist in the output directory, or PDF already exists if --toPdf is set',
+        optional: true,
+      },
+      overwrite: {
+        kind: 'boolean',
+        brief:
+          'Overwrite existing files if they already exist in the output directory',
+        optional: true,
+      },
+      fromFile: {
+        kind: 'parsed',
+        brief:
+          'Path to a text file containing a list of document names to scrape from Digivatlib (one name per line)',
+        parse: String,
+        optional: true,
+      },
     },
   },
   docs: {
     brief: description,
   },
-});
+})
 
 export const app = buildApplication(command, {
   name: 'digivatlib-scraper',
   versionInfo: {
     currentVersion: version,
   },
-});
+})
